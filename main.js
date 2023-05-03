@@ -61,14 +61,16 @@ while (productName !== 'SALIR') {
         if (units > 0 && units <= product.stock) {
             const price = product.price;
             alert(`El costo total de su compra es ${price * units}$, Gracias por su compra!`);
+            productName = 'SALIR';
         } else {
             alert('La cantidad ingresada no es válida');
         }
         existeProducto = false;
+    } else {
+        productName = prompt('Productos en Stock: Zapato, Tenis, Pantalón, Medias. Si desea finalizar la compra escriba "salir".')
+            .trim()
+            .toUpperCase();
     }
-    productName = prompt('Productos en Stock: Zapato, Tenis, Pantalón, Medias. Si desea finalizar la compra escriba "salir".')
-        .trim()
-        .toUpperCase();
 }
 
 
