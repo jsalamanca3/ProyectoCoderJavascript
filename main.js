@@ -16,10 +16,20 @@ const words = [
   },
 ];
 
+class fruta {
+  constructor(name, price, stock) {
+    this.name = name;
+    this.price = price;
+    this.stock = stock;
+  }
+}
+
 const frutas = words.map((word) => word.name);
 alert("¡Bienvenidos a nuestra tienda de frutas!");
 alert(
-  `En el momento solo disponemos de las siguientes frutas: ${frutas.join(", ")}.`
+  `En el momento solo disponemos de las siguientes frutas: ${frutas.join(
+    ", "
+  )}.`
 );
 
 const mostrarFrutas = () => {
@@ -31,11 +41,11 @@ const mostrarFrutas = () => {
 let continuar = true;
 
 while (continuar) {
-  const fruit = {
-    name: prompt("Ingrese nombre de una fruta").toLocaleLowerCase(),
-    price: Number(prompt("Ingrese el valor por unidad de la fruta")),
-    stock: Number(prompt("Ingrese la cantidad de frutas")),
-  };
+  const fruit = new fruta(
+    prompt("Ingrese nombre de una fruta").toLocaleLowerCase(),
+    Number(prompt("Ingrese el valor por unidad de la fruta")),
+    Number(prompt("Ingrese la cantidad de frutas"))
+  );
   words.push(fruit);
   mostrarFrutas();
   continuar = confirm("¿Quiere seguir ingresando frutas?");
@@ -45,8 +55,12 @@ while (continuar) {
 const actualizarFruta = (name) => {
   const index = words.findIndex((word) => word.name === name);
   if (index !== -1) {
-    const newName = prompt("Ingrese el nuevo nombre de la fruta").toLocaleLowerCase();
-    const newPrice = Number(prompt("Ingrese el nuevo valor por unidad de la fruta"));
+    const newName = prompt(
+      "Ingrese el nuevo nombre de la fruta"
+    ).toLocaleLowerCase();
+    const newPrice = Number(
+      prompt("Ingrese el nuevo valor por unidad de la fruta")
+    );
     const newStock = Number(prompt("Ingrese la nueva cantidad de fruta"));
     words[index] = { name: newName, price: newPrice, stock: newStock };
   }
@@ -55,7 +69,9 @@ const actualizarFruta = (name) => {
 continuar = confirm("¿Quiere actualizar alguna fruta?");
 
 const actualizarFruit = () => {
-  const name = prompt("Ingrese el nombre de la fruta a actualizar").toLowerCase();
+  const name = prompt(
+    "Ingrese el nombre de la fruta a actualizar"
+  ).toLowerCase();
   actualizarFruta(name);
 };
 
@@ -80,7 +96,9 @@ const eliminarFruta = (name) => {
 continuar = confirm("Quiere eliminar alguna fruta");
 
 while (continuar) {
-  const frutaBorrar = prompt("Ingrese el nombre de la fruta a eliminar").toLocaleLowerCase();
+  const frutaBorrar = prompt(
+    "Ingrese el nombre de la fruta a eliminar"
+  ).toLocaleLowerCase();
   eliminarFruta(frutaBorrar);
   continuar = confirm("¿Quiere seguir eliminando frutas?");
   if (continuar) {
