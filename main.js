@@ -16,7 +16,7 @@ const words = [
   },
 ];
 
-class fruta {
+class Fruta {
   constructor(name, price, stock) {
     this.name = name;
     this.price = price;
@@ -41,7 +41,7 @@ const mostrarFrutas = () => {
 let continuar = true;
 
 while (continuar) {
-  const fruit = new fruta(
+  const fruit = new Fruta(
     prompt("Ingrese nombre de una fruta").toLocaleLowerCase(),
     Number(prompt("Ingrese el valor por unidad de la fruta")),
     Number(prompt("Ingrese la cantidad de frutas"))
