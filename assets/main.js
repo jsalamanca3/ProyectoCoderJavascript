@@ -5,35 +5,35 @@ const words = savedWords ? JSON.parse(savedWords): [
         name: "manzana",
         price: 1200,
         stock: 20,
-        img: "imagenes.manzana.jpg",
+        img: "/imagenes/manzana.jpg"
       },
       {
         id: 2,
         name: "pera",
         price: 800,
         stock: 15,
-        img: "imgenes/pera.jpg",
+        img: "/imgenes/pera.jpg"
       },
       {
         id: 3,
         name: "mango",
         price: 1500,
         stock: 30,
-        img: "imgenes/mango.jpg",
+        img: "/imgenes/mango.jpg"
       },
       {
         id: 4,
         name: "mandarina",
         price: 900,
         stock: 50,
-        img: "imgenes/mandarina.jpg",
+        img: "/imgenes/mandarina.jpg"
       },
       {
         id: 5,
         name: "naranja",
         price: 900,
         stock: 50,
-        img: "imgenes/naranja.jpg",
+        img: "/imgenes/naranja.jpg"
       },
     ];
 
