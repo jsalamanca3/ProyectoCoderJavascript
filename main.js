@@ -68,7 +68,7 @@ const products = ({ id, name, price, stock, img }, index) => {
                     <form id="formCarrito${id}">
                     <input name="id" type="hidden" value="${id}">
                     <input name="cantidad" type="number" value="1" min="1" max="${stock}">
-                    <button type="submit" id="btnContador">Agregar al carrito</button>
+                    <button type="submit" id="btnContador${id}" onclick"myFunction()">Agregar al carrito</button>
                     </form>
     `;
   cajaCard.append(card);
