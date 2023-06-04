@@ -14,7 +14,7 @@ html {
     height: 150px;
     justify-content: center;
     align-items: center;
-    background-image: url("imagenes/header.jpg");
+    background-image: url("img/header.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }

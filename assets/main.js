@@ -5,35 +5,35 @@ const words = savedWords ? JSON.parse(savedWords): [
         name: "manzana",
         price: 1200,
         stock: 20,
-        img: "/imagenes/manzana.jpg"
+        img: "https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/manzana.jpg"
       },
       {
         id: 2,
         name: "pera",
         price: 800,
         stock: 15,
-        img: "/imgenes/pera.jpg"
+        img:"https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/pera.jpg"
       },
       {
         id: 3,
         name: "mango",
         price: 1500,
         stock: 30,
-        img: "/imgenes/mango.jpg"
+        img:"https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/mango.jpg"
       },
       {
         id: 4,
         name: "mandarina",
         price: 900,
         stock: 50,
-        img: "/imgenes/mandarina.jpg"
+        img:"https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/mandarina.jpg"
       },
       {
         id: 5,
         name: "naranja",
         price: 900,
         stock: 50,
-        img: "/imgenes/naranja.jpg"
+        img:"https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/naranja.jpg"
       },
     ];
 
@@ -68,7 +68,7 @@ const products = ({ id, name, price, stock, img }, index) => {
                     <form id="formCarrito${id}">
                     <input name="id" type="hidden" value="${id}">
                     <input name="cantidad" type="number" value="1" min="1" max="${stock}">
-                    <button type="submit" id="btnContador${id}" onclick="(ev)=> {addButton}">Agregar al carrito</button>
+                    <button type="submit" id="btnContador${id}" onclick="addButton">Agregar al carrito</button>
                     </form>
     `;
   cajaCard.append(card);
@@ -187,7 +187,7 @@ btndelete.addEventListener("click", function () {
 });
 
 //contador carrito
-const btnElement = document.getElementById("btnContador${id}");
+const btnElement = document.getElementById("btnContador");
 const spanElement = document.getElementById("spanContador");
 let contador = 0;
 
