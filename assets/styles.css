@@ -14,7 +14,7 @@ html {
     height: 150px;
     justify-content: center;
     align-items: center;
-    background-image: url("img/header.jpg");
+    background-image: url("imagenes/header.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -97,7 +97,7 @@ html {
 img {
     width: 100%;
     height: auto;
-    background: cover;
+    background-size: cover;
 }
 .cardProduct {
     padding: 2% 4%;

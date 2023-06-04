@@ -5,35 +5,35 @@ const words = savedWords ? JSON.parse(savedWords): [
         name: "manzana",
         price: 1200,
         stock: 20,
-        img: "img/manzana.jpg",
+        img: "imagenes.manzana.jpg",
       },
       {
         id: 2,
         name: "pera",
         price: 800,
         stock: 15,
-        img: "img/pera.jpg",
+        img: "imgenes/pera.jpg",
       },
       {
         id: 3,
         name: "mango",
         price: 1500,
         stock: 30,
-        img: "img/mango.jpg",
+        img: "imgenes/mango.jpg",
       },
       {
         id: 4,
         name: "mandarina",
         price: 900,
         stock: 50,
-        img: "img/mandarina.jpg",
+        img: "imgenes/mandarina.jpg",
       },
       {
         id: 5,
         name: "naranja",
         price: 900,
         stock: 50,
-        img: "img/naranja.jpg",
+        img: "imgenes/naranja.jpg",
       },
     ];
 
@@ -68,7 +68,7 @@ const products = ({ id, name, price, stock, img }, index) => {
                     <form id="formCarrito${id}">
                     <input name="id" type="hidden" value="${id}">
                     <input name="cantidad" type="number" value="1" min="1" max="${stock}">
-                    <button type="submit" id="btnContador${id}" onclick"myFunction()">Agregar al carrito</button>
+                    <button type="submit" id="btnContador${id}" onclick="(ev)=> {addButton}">Agregar al carrito</button>
                     </form>
     `;
   cajaCard.append(card);
@@ -187,11 +187,12 @@ btndelete.addEventListener("click", function () {
 });
 
 //contador carrito
-const btnElement = document.getElementById("btnContador");
+const btnElement = document.getElementById("btnContador${id}");
 const spanElement = document.getElementById("spanContador");
 let contador = 0;
 
-btnElement.onclick = function () {
+function addButton(ev) {
+  const detail =ev.detail;
   contador++;
   spanElement.textContent = contador;
 };
