@@ -5,35 +5,35 @@ const words = savedWords ? JSON.parse(savedWords): [
         name: "manzana",
         price: 1200,
         stock: 20,
-        img: "https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/manzana.jpg"
+        img: "assets/img/manzana.jpg"
       },
       {
         id: 2,
         name: "pera",
         price: 800,
         stock: 15,
-        img:"https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/pera.jpg"
+        img:"assets/img/pera.jpg"
       },
       {
         id: 3,
         name: "mango",
         price: 1500,
         stock: 30,
-        img:"https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/mango.jpg"
+        img:"assets/img/mango.jpg"
       },
       {
         id: 4,
         name: "mandarina",
         price: 900,
         stock: 50,
-        img:"https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/mandarina.jpg"
+        img:"assets/img/mandarina.jpg"
       },
       {
         id: 5,
         name: "naranja",
         price: 900,
         stock: 50,
-        img:"https://academiausbbogedu-my.sharepoint.com/personal/jfsalamanca_academia_usbbog_edu_co/Documents/Programaci%C3%B3n%20aprendiendo/Coder-js/Segunda%20PreEntrega/Img/naranja.jpg"
+        img:"assets/img/naranja.jpg"
       },
     ];
 
