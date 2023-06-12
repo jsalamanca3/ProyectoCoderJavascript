@@ -1,0 +1,61 @@
+body {
+    background: var(--color-background-sections);
+}
+.header {
+    color: #36A0FF;
+    font-size: 25px;
+    padding: 10px;
+}
+.bigicon {
+    font-size: 25px;
+    color: #36A0FF;
+}
+.container__form_contacto {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.form-group {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+h2,h3,h4,h5{
+    font-size: var(--title-large);
+    font-family: var(--font-title);
+    font-weight: var(--font-weight-title-regular);
+}
+p {
+    font-size: var(--letter-medium);
+    font-family: var(--font-letter);
+    font-weight: var(--font-weight-letter-regular);
+}
+legend {
+    font-size: var(--title-large);
+    font-family: var(--font-title);
+    font-weight: var(--font-weight-title-regular);
+}
+input,
+textarea,
+input::placeholder {
+    font-size: var(--letter-small);
+    font-family: var(--font-letter);
+    font-style: italic;
+}
+button {
+    font-size: var(--letter-medium);
+    font-family: var(--font-letter);
+}
+footer{
+    margin-top: 50px;
+}
+
+@media screen and (max-width: 767px) {
+    .text__center {
+        text-align: center;
+        width: 100%;
+        margin-bottom: 25px;
+    }
+    .container__form_contacto{
+        width: 90% !important;
+    }
+}

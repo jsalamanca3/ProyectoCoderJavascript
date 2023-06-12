@@ -1,0 +1,6 @@
+@mixin letter-h-p($size,$family,$weight,$color){
+    font-size: $size;
+    font-family: $family;
+    font-weight: $weight;
+    color: $color;
+};

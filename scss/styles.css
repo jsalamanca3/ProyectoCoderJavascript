@@ -1,0 +1,684 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.material-symbols-outlined {
+  color: #565555;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+}
+
+html {
+  font-size: 62.5%;
+}
+html body {
+  background-color: #fcfcfc;
+}
+
+header, header .header-caja {
+  position: fixed;
+  width: 100%;
+  height: 140px;
+  left: 0;
+  top: 0;
+  background-color: #344A53;
+  z-index: 10;
+}
+header .header-caja {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.5fr;
+  background-image: url(./../assets/img/header.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+header .header-caja .header-div-logo {
+  display: grid;
+  justify-items: center;
+  grid-area: 1/1/2/4;
+  text-align: center;
+}
+header .header-caja .header-div-logo .header-div-logo-h {
+  text-align: center;
+  font-size: 8rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 900;
+  color: #0468bf;
+}
+header .header-caja .header-div-nav {
+  grid-area: 2/1/3/4;
+}
+header .header-caja .header-div-nav .div-nav {
+  width: 100%;
+  height: auto;
+}
+header .header-caja .header-div-nav .div-nav .nav-ul {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.8rem;
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  color: #020000;
+  list-style: none;
+}
+header .header-caja .header-div-nav .div-nav .nav-ul .nav-ul-li-a, header .header-caja .header-div-nav .div-nav .nav-ul .nav-ul-li-a:hover {
+  color: #f2f2f2;
+  text-decoration: none;
+}
+header .header-caja .header-div-nav .div-nav .nav-ul .nav-ul-li-a:hover {
+  color: #0e6ba8;
+}
+
+body {
+  padding-top: 140px;
+}
+
+main section .main-caja-div-contenido {
+  width: 100%;
+  height: auto;
+}
+main section .main-caja-div-contenido .div-contenido-bienvenida {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+  padding: 1% 3%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+main section .main-caja-div-contenido .div-contenido-bienvenida h2 {
+  font-size: 5rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 900;
+  color: #1b2021;
+}
+main section .main-caja-div-contenido .div-contenido-bienvenida hr {
+  width: 100%;
+  border: 1px solid #181719;
+  opacity: 0.5;
+  box-shadow: 0 0 6px #181719;
+  border-radius: 10px;
+  z-index: 1;
+}
+main section .main-caja-div-contenido .div-contenido-bienvenida p {
+  font-size: 2.4rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+  color: #38302e;
+  margin-top: 20px;
+}
+
+main section .div-caja-loMasVisto {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  margin-top: 70px;
+  align-items: center;
+}
+main section .div-caja-loMasVisto .h2_text-gallery {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  font-size: 5rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 900;
+  color: #212529;
+}
+main section .div-caja-loMasVisto hr {
+  width: 50%;
+  margin-bottom: 40px;
+  border: 1px solid #181719;
+  opacity: 0.5;
+  box-shadow: 0 0 6px #181719;
+  border-radius: 10px;
+  z-index: 1;
+}
+main section .div-caja-loMasVisto .div___container-gallery {
+  display: grid;
+  grid-template-areas: "primerafila" "segundafila";
+  grid-gap: 10px;
+  width: 80%;
+  height: auto;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery-img {
+  grid-area: primerafila;
+  display: grid;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  margin-top: 15px;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery-img .img__gallery-index {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery-img .img-caja1 {
+  grid-area: 1/1/3/2;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery-img .img-caja2 {
+  grid-area: 1/2/2/4;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery-img .img-caja3 {
+  grid-area: 2/2/3/3;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery-img .img-caja4 {
+  grid-area: 2/3/3/4;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery-img .img-caja5 {
+  grid-area: 1/4/3/5;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery-img .zoom-img {
+  transition: transform 0.6s;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery-img .zoom-img:hover {
+  transform: scale(1.04);
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery_img2 {
+  grid-area: segundafila;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 10px;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery_img2 .img__gallery-index {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery_img2 .img-caja6 {
+  grid-area: 1/1/2/2;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery_img2 .img-caja7 {
+  grid-area: 1/2/2/3;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery_img2 .img-caja8 {
+  grid-area: 1/3/2/4;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery_img2 .zoom-img {
+  transition: transform 0.6s;
+}
+main section .div-caja-loMasVisto .div___container-gallery .div__gallery_img2 .zoom-img:hover {
+  transform: scale(1.04);
+}
+
+main section .div-caja-carrito .main-caja {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 0% 2%;
+}
+main section .div-caja-carrito .main-caja h2 {
+  margin-top: 80px;
+  margin-bottom: 15px;
+  font-size: 5rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 900;
+  color: #212529;
+}
+main section .div-caja-carrito .main-caja hr {
+  width: 50%;
+  margin-bottom: 60px;
+  border: 1px solid #181719;
+  opacity: 0.5;
+  box-shadow: 0 0 6px #181719;
+  border-radius: 10px;
+  z-index: 1;
+}
+main section .div-caja-carrito .main-caja .main-caja-div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: auto;
+  gap: 25px;
+  justify-content: center;
+}
+main section .div-caja-carrito .main-caja .main-caja-div .card {
+  width: 20%;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  border: none;
+  background-color: #181719;
+  box-shadow: 0 0 15px #181719;
+}
+main section .div-caja-carrito .main-caja .main-caja-div .card h3 {
+  font-size: 2.4rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 700;
+  color: #e6e8e6;
+  text-align: center;
+  border-bottom: 1px solid #e6e8e6;
+}
+main section .div-caja-carrito .main-caja .main-caja-div .card p {
+  font-size: 1.8rem;
+  font-family: "Merriweather", serif;
+  font-weight: 500;
+  color: #e6e8e6;
+}
+main section .div-caja-carrito .main-caja .main-caja-div img {
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+main section .div-caja-carrito .main-caja .main-caja-div .cardProduct {
+  padding: 2% 4%;
+}
+main section .div-caja-carrito .main-caja .main-caja-div form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 2% 3%;
+  margin-bottom: 10px;
+}
+main section .div-caja-carrito .main-caja .main-caja-div input {
+  width: 25%;
+  height: 40px;
+  text-align: center;
+  font-size: 1.8rem;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  color: #212529;
+}
+main section .div-caja-carrito .main-caja .main-caja-div input[type=number]::-webkit-inner-spin-button,
+main section .div-caja-carrito .main-caja .main-caja-div input[type=number]::-webkit-outer-spin-button,
+main section .div-caja-carrito .main-caja .main-caja-div form button {
+  width: 70%;
+  height: 40px;
+  font-size: 1.4rem;
+  font-family: "Merriweather", serif;
+  font-weight: 500;
+  color: #212529;
+}
+main section .div-caja-carrito .main-caja .main-caja-div .zoom-img {
+  transition: transform 0.6s;
+}
+main section .div-caja-carrito .main-caja .main-caja-div .zoom-img:hover {
+  transform: scale(1.04);
+}
+main section .div-caja-carrito .main-caja #cajaCard {
+  width: 100%;
+  height: auto;
+}
+
+main section .div__container_section-historia {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+main section .div__container_section-historia .container__section-hitoria {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+}
+main section .div__container_section-historia .container__section-hitoria .h2__historia-bienvenida, main section .div__container_section-historia .container__section-hitoria .p__historias-bienvenida {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 5rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 900;
+  color: #212529;
+}
+main section .div__container_section-historia .container__section-hitoria hr {
+  width: 100%;
+  border: 1px solid #181719;
+  opacity: 0.5;
+  box-shadow: 0 0 6px #181719;
+  border-radius: 10px;
+  z-index: 1;
+}
+main section .div__container_section-historia .container__section-hitoria .p__historias-bienvenida {
+  font-size: 2.4rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+  color: #38302e;
+  margin-bottom: 50px;
+}
+main section .div__container_section-historia .container__section-hitoria .caja-img-bienvenida {
+  width: 65%;
+  height: auto;
+  justify-items: center;
+  border: 3px solid #181719;
+  box-shadow: 0 0 6px #181719;
+  background: #181719;
+}
+main section .div__container_section-historia .container__section-hitoria .caja-img-bienvenida img {
+  width: 100%;
+  height: auto;
+  padding: 1%;
+  background-size: cover;
+}
+main section .div-contenido-sobreNosotros .h__section_principios-historia, main section .div-contenido-sobreNosotros .p__section_principios-historia {
+  font-size: 5rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 400;
+  color: #38302e;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+main section .div-contenido-sobreNosotros .p__section_principios-historia {
+  margin-top: 30px;
+  margin-bottom: 40px;
+  padding: 0 10% 0 10%;
+  font-size: 2.4rem;
+}
+main section .div-contenido-sobreNosotros .container {
+  width: 70%;
+}
+main section .div-contenido-sobreNosotros .container .card-columns {
+  -moz-column-count: 2;
+       column-count: 2;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+main section .div-contenido-sobreNosotros .container .card-columns .card-img {
+  width: 100%;
+  height: 250px;
+  background-size: cover;
+}
+main section .div-contenido-sobreNosotros .container .card-columns .card-img-overlay {
+  background: rgba(0, 0, 0, 0.3);
+}
+main section .div-contenido-sobreNosotros .container .card-columns .card-img-overlay .h4Title-nosotros, main section .div-contenido-sobreNosotros .container .card-columns .card-img-overlay .card-text {
+  font-size: 3.2rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  color: #e6e8e6;
+}
+main section .div-contenido-sobreNosotros .container .card-columns .card-img-overlay .card-text {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+main section .div-contenido-sobreNosotros .container .card-columns .card-img-overlay:hover {
+  background: #181719;
+}
+main section .div-contenido-sobreNosotros .container .card-columns .card {
+  margin: 0 0 20px 0;
+}
+main section .div-contenido-sobreNosotros .container .card-columns h4 {
+  font-size: 22px;
+}
+main section .section__siguenos {
+  width: 100%;
+  height: auto;
+}
+main section .section__siguenos .hr__siguenos {
+  width: 90%;
+  margin: auto;
+  margin-top: 70px;
+  border: 2px solid #181719;
+  opacity: 1;
+  box-shadow: 0 0 6px #181719;
+  border-radius: 10px;
+}
+main section .section__siguenos .h2__Title-siguenos, main section .section__siguenos .h4__Title-siguenos, main section .section__siguenos .h3__Title-siguenos {
+  font-size: 10rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  color: #38302e;
+  margin-top: 70px;
+  padding: 0 10% 0 10%;
+  text-align: center;
+}
+main section .section__siguenos .h3__Title-siguenos {
+  font-size: 5rem;
+  font-weight: 500;
+}
+main section .section__siguenos .h4__Title-siguenos {
+  margin-bottom: 60px;
+  font-size: 3.2rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 1023px) {
+  main section .div__container_section-historia .container__section-hitoria .h2__historia-bienvenida, main section .div__container_section-historia .container__section-hitoria .p__historias-bienvenida {
+    font-size: 6rem;
+  }
+  main section .div__container_section-historia .container__section-hitoria .p__historias-bienvenida {
+    font-size: 1.8rem;
+  }
+  main section .h__section_principios-historia, main section .div-contenido-sobreNosotros .p__section_principios-historia {
+    font-size: 3.2rem;
+  }
+  main section .p__section_principios-historia {
+    font-size: 1.8rem;
+  }
+  main section .section__siguenos .h2__Title-siguenos, main section .section__siguenos .h3__Title-siguenos, main section .section__siguenos .h4__Title-siguenos {
+    font-size: 6rem;
+  }
+  main section .section__siguenos .h3__Title-siguenos {
+    font-size: 3.2rem;
+  }
+  main section .section__siguenos .h4__Title-siguenos {
+    font-size: 2.4rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  main section .div__container_section-historia .container__section-hitoria .h2__historia-bienvenida, main section .div__container_section-historia .container__section-hitoria .p__historias-bienvenida {
+    font-size: 4.2rem;
+  }
+  main section .div__container_section-historia .container__section-hitoria .p__historias-bienvenida {
+    font-size: 1.8rem;
+  }
+  main section .div__container-img-historia .div__container__historia-img {
+    width: 85%;
+  }
+  main section .container {
+    width: 100%;
+  }
+  main section .container .card-columns {
+    -moz-column-count: 1;
+         column-count: 1;
+  }
+  main section .container .card-columns .card-img-overlay .h4Title-nosotros, main section .div-contenido-sobreNosotros .container .card-columns .card-img-overlay .card-text {
+    font-size: 2.4rem;
+  }
+  main section .container .card-columns .card-img-overlay .card-text {
+    font-size: 1.4rem;
+  }
+  main section .section__siguenos .h2__Title-siguenos, main section .section__siguenos .h3__Title-siguenos, main section .section__siguenos .h4__Title-siguenos {
+    font-size: 4.2rem;
+  }
+  main section .section__siguenos .h3__Title-siguenos {
+    font-size: 2.4rem;
+  }
+  main section .section__siguenos .h4__Title-siguenos {
+    font-size: 1.8rem;
+  }
+}
+@media screen and (max-width: 766px) {
+  main section .container {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 500px) {
+  main section .container {
+    width: 90%;
+  }
+}
+main section .div-contenido-contacto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 0 5%;
+}
+main section .div-contenido-contacto h3 {
+  font-size: 5rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 900;
+  color: #1b2021;
+}
+main section .div-contenido-contacto hr {
+  width: 100%;
+  border: 1px solid #181719;
+  opacity: 0.5;
+  box-shadow: 0 0 6px #181719;
+  border-radius: 10px;
+  z-index: 1;
+}
+main section .div-contenido-contacto div form fieldset {
+  width: 75%;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+main section .div-contenido-contacto div form fieldset legend {
+  font-size: 2.4rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  color: #36A0FF;
+}
+main section .div-contenido-contacto div form fieldset .header {
+  padding: 10px;
+  font-size: 25px;
+  color: #36A0FF;
+}
+main section .div-contenido-contacto div form fieldset .bigicon {
+  font-size: 25px;
+  color: #36A0FF;
+}
+main section .div-contenido-contacto div form fieldset .form-group {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+main section .div-contenido-contacto div form fieldset input::-moz-placeholder {
+  font-size: 1.2rem;
+  font-family: "Merriweather", serif;
+  font-style: italic;
+}
+main section .div-contenido-contacto div form fieldset input,
+main section .div-contenido-contacto div form fieldset textarea,
+main section .div-contenido-contacto div form fieldset input::placeholder {
+  font-size: 1.2rem;
+  font-family: "Merriweather", serif;
+  font-style: italic;
+}
+main section .div-contenido-contacto div form fieldset button {
+  font-size: 1.4rem;
+  font-family: "Merriweather", serif;
+}
+main section .div-contenido-contacto div .text__center .h2__form_horario {
+  font-size: 2.4rem;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 700;
+  color: #1b2021;
+}
+main section .div-contenido-contacto div .text__center p {
+  font-size: 1.4rem;
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  color: #212529;
+}
+main section footer {
+  margin-top: 50px;
+}
+
+@media screen and (max-width: 767px) {
+  main section .div-contenido-contacto div form fieldset {
+    width: 80%;
+  }
+  main section .div-contenido-contacto div form div .CajaDiv__contacto-textForm {
+    width: 100%;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+}
+@media screen and (max-width: 475px) {
+  main section .div-contenido-contacto div form fieldset {
+    width: 95%;
+  }
+}
+footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  background-color: #262329;
+}
+footer .container__footer {
+  display: flex;
+  width: 80%;
+  height: 60px;
+  margin-top: 15px;
+  justify-content: center;
+}
+footer .container__footer .footer__ul-li {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  height: auto;
+  padding-left: 0;
+  justify-content: space-between;
+  align-items: center;
+  /* uso del map */
+}
+footer .container__footer .footer__ul-li .li__a-links {
+  list-style: none;
+}
+footer .container__footer .footer__ul-li .li__a-links .footer__li_a-links {
+  text-decoration: none;
+}
+footer .container__footer .footer__ul-li .li__a-links .li__a-links:hover {
+  text-decoration: none;
+}
+footer .container__footer .footer__ul-li .fa-brands,
+footer .container__footer .footer__ul-li .fab {
+  font-size: 4.5rem;
+  color: #f0ffff;
+}
+footer .container__footer .footer__ul-li .fa-github:hover {
+  color: #110b11;
+  font-size: 6rem;
+  filter: drop-shadow(0 0 6px #181719);
+}
+footer .container__footer .footer__ul-li .fa-facebook:hover {
+  color: #2541b2;
+  font-size: 6rem;
+  filter: drop-shadow(0 0 6px #181719);
+}
+footer .container__footer .footer__ul-li .fa-linkedin:hover {
+  color: #006494;
+  font-size: 6rem;
+  filter: drop-shadow(0 0 6px #181719);
+}
+footer .container__footer .footer__ul-li .fa-youtube:hover {
+  color: #FF230E;
+  font-size: 6rem;
+  filter: drop-shadow(0 0 6px #181719);
+}
+footer .footer__p-margintop {
+  margin-top: 45px;
+}
+footer .footer__p {
+  margin-bottom: 0.5%;
+  font-size: 1.4rem;
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  color: #e6e8e6;
+}
+
+@media screen and (max-width: 460px) {
+  footer .container__footer {
+    width: 100%;
+  }
+  footer .container__footer .footer__ul-li {
+    width: 85%;
+  }
+}/*# sourceMappingURL=styles.css.map */

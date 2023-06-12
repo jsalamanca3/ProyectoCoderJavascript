@@ -1,0 +1,13 @@
+* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.gallery-cell {
+    width: 80%;
+    margin-right: 20px;
+    counter-increment: gallery-cell;
+}
+
+
+
+

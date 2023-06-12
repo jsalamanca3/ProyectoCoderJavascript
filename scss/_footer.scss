@@ -1,0 +1,82 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  align-items: center;
+  background-color: map-get($background-colors , c-footer);
+  .container__footer {
+    display: flex;
+    width: 80%;
+    height: 60px;
+    margin-top: 15px;
+    justify-content: center;
+    .footer__ul-li {
+      display: flex;
+      flex-direction: row;
+      width: 70%;
+      height: auto;
+      padding-left: 0;
+      justify-content: space-between;
+      align-items: center;
+      .li__a-links {
+        list-style: none;
+        .footer__li_a-links  {
+          text-decoration: none;
+        }
+        .li__a-links:hover {
+          text-decoration: none;
+        }
+      }
+      /* uso del map */
+      .fa-brands,
+      .fab {
+        font-size: map-get($redes-size, links);
+        color: $color-btn-red-social;
+      }
+      .fa-github:hover {
+        color: map-get($redes, github);
+        font-size: map-get($redes-size, linkshover);
+        filter: drop-shadow(0 0 6px #181719);
+      }
+      .fa-facebook:hover {
+        color: map-get($redes, facebook);
+        font-size: map-get($redes-size, linkshover);
+        filter: drop-shadow(0 0 6px #181719);
+      }
+      .fa-linkedin:hover {
+        color: map-get($redes, linkedin);
+        font-size: map-get($redes-size, linkshover);
+        filter: drop-shadow(0 0 6px #181719);
+      }
+      .fa-youtube:hover {
+        color: map-get($redes, youtube);
+        font-size: map-get($redes-size, linkshover);
+        filter: drop-shadow(0 0 6px #181719);
+      }
+    }
+  }
+  .footer__p-margintop {
+    margin-top: 45px;
+  }
+  .footer__p {
+    margin-bottom: 0.5%;
+    @include letter-h-p(
+      $letter-medium,
+      $font-letter,
+      $font-weight-letter-regular,
+      $color-letter-li
+    );
+  }
+}
+
+@media screen and (max-width: 460px) {
+  footer {
+    .container__footer {
+      width: 100%;
+      .footer__ul-li {
+        width: 85%;
+      }
+    }
+  }
+}

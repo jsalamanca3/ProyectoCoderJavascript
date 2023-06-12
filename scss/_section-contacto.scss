@@ -1,0 +1,128 @@
+main {
+  section {
+    .div-contenido-contacto {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: auto;
+      padding: 0 5%;
+      h3 {
+        @include letter-h-p(
+          $title-haiger,
+          $font-letter-historia,
+          $font-weight-title-medium,
+          $color-title
+        );
+      }
+      hr {
+        width: 100%;
+        border: 1px solid #181719;
+        opacity: 0.5;
+        box-shadow: 0 0 6px #181719;
+        border-radius: 10px;
+        z-index: 1;
+      }
+      div {
+        form {
+          fieldset {
+            width: 75%;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            legend {
+              @include letter-h-p(
+                $title-large,
+                $font-title,
+                $font-weight-title-regular,
+                $color-contacto
+              );
+            }
+            .header {
+              padding: 10px;
+              font-size: 25px;
+              color: $color-contacto;
+            }
+            .bigicon {
+              font-size: 25px;
+              color: $color-contacto;
+            }
+            .form-group {
+              margin-top: 15px;
+              margin-bottom: 10px;
+              justify-content: center;
+            }
+            input,
+            textarea,
+            input::placeholder {
+              font-size: $letter-small;
+              font-family: $font-letter;
+              font-style: italic;
+            }
+            button {
+              font-size: $letter-medium;
+              font-family: $font-letter;
+            }
+          }
+        }
+      }
+      div .text__center {
+        .h2__form_horario {
+          @include letter-h-p(
+            $title-large,
+            $font-title,
+            $font-weight-title-regular,
+            $color-title
+          );
+        }
+        p {
+          @include letter-h-p(
+            $letter-medium,
+            $font-letter,
+            $font-weight-letter-regular,
+            $color-text
+          );
+        }
+      }
+    }
+    footer {
+      margin-top: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  main {
+    section {
+      .div-contenido-contacto {
+        div {
+          form {
+            fieldset {
+              width: 80%;
+            }
+            div .CajaDiv__contacto-textForm {
+              width: 100%;
+              margin-bottom: 25px;
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 475px) {
+  main {
+    section {
+      .div-contenido-contacto {
+        div {
+          form {
+            fieldset {
+              width: 95%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

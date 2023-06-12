@@ -1,46 +1,280 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tercera PreEntrega Curso JavaScript</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <link rel="stylesheet" href="assets/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="¿Quieres saber más de Tienda Virtua de Frutas? Ven y revisa quienes somos y acompáñanos en nuestras redes sociales.">
+  <meta name="keywords" content="tienda frutas consumibles contacto venta virtual">
+  <title>Tienda Virtual de Frutas</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;700&family=Open+Sans:wght@300;400;700&family=Work+Sans:wght@500;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/form.css">
+  <link rel="stylesheet" href="scss/styles.css">
+  <link rel="stylesheet" href="css/fontawesome.min.css">
 </head>
+
 <body>
-    <header>
-        <div class="header-caja">
-            <div class="header-caja-div">
-                <h1 class="header-caja-h">Tienda de Frutas β</h1>
+  <header>
+    <div class="header-caja">
+      <div class="header-div-logo">
+        <h1 class="header-div-logo-h">Tienda Virtual de Frutas</h1>
+      </div>
+      <div class="header-div-nav">
+        <nav class="div-nav">
+          <ul class="nav-ul">
+            <li><a class="nav-ul-li-a" href="#inicio">Inicio</a></li>
+            <li><a class="nav-ul-li-a" href="#tienda">Tienda</a></li>
+            <li><a class="nav-ul-li-a" href="#">Carrarito</a></li>
+            <li><a class="nav-ul-li-a" href="#sobreNosotros">Sobre Nosotros</a></li>
+            <li><a class="nav-ul-li-a" href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section>
+      <div class="main-div-carrito">
+        <span class="material-symbols-outlined">
+          shopping_cart
+        </span>
+        <span class="contador" id="spanContador"></span>
+      </div>
+    </section>
+    <section id="inicio">
+      <div class="main-caja-div-contenido">
+        <div class="div-contenido-bienvenida">
+          <h2>Te damos la bienvenida a nuestra Tienda</h2>
+          <hr>
+          <p>En nuestra tienda encontrarás una gran variedad de Frutas que podrás ir viendo en nuestra página.
+            Pues bien, tenemos preparado para tí muchos productos relacionados con frutas de las más alta
+            calidad.</p>
+          <p>- Animate a disfrutar de nuestros productos -</p>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="div-caja-loMasVisto">
+        <h2 class="h2_text-gallery">Lo más visto</h2>
+        <hr>
+        <div class="div___container-gallery">
+          <div class="div__gallery-img">
+            <div data-aos="fade-up" data-aos-duration="3000" data-aos-once="true" class="img-caja1">
+              <img class="img__gallery-index zoom-img" src="assets/img/caja-2.jpg" alt="Naranjas">
             </div>
+            <div data-aos="fade-up" data-aos-duration="3000" data-aos-once="true" class="img-caja2">
+              <img class="img__gallery-index zoom-img" src="assets/img/caja-1.jpg" alt="Imagen de antiguedades">
+            </div>
+            <div data-aos="fade-up" data-aos-duration="3000" data-aos-once="true" class="img-caja3">
+              <img class="img__gallery-index zoom-img" src="assets/img/caja-3.jpg" alt="Imagen de reloj de arena">
+            </div>
+            <div data-aos="fade-up" data-aos-duration="3000" data-aos-once="true" class="img-caja4">
+              <img class="img__gallery-index zoom-img" src="assets/img/caja-5.jpg" alt="Imagen de lentes formales">
+            </div>
+            <div data-aos="fade-up" data-aos-duration="3000" data-aos-once="true" class="img-caja5">
+              <img class="img__gallery-index zoom-img" src="assets/img/caja-4.jpg"
+                alt="Imagen de objetos de decoración">
+            </div>
+          </div>
+          <div class="div__gallery_img2">
+            <div data-aos="fade-up" data-aos-duration="3000" data-aos-once="true" class="img-caja6">
+              <img class="img__gallery-index zoom-img" src="assets/img/caja-6.jpg" alt="Imagen de ropa">
+            </div>
+            <div data-aos="fade-up" data-aos-duration="3000" data-aos-once="true" class="img-caja7">
+              <img class="img__gallery-index zoom-img" src="assets/img/caja-7.jpg" alt="Imagen de una tienda de ropa">
+            </div>
+            <div data-aos="fade-up" data-aos-duration="3000" data-aos-once="true" class="img-caja8">
+              <img class="img__gallery-index zoom-img" src="assets/img/caja-8.jpg" alt="Imange de copas y vasos">
+            </div>
+          </div>
         </div>
-    </header>
-    <main>
-        <div class="main-div-carrito">
-            <span class="material-symbols-outlined">
-                shopping_cart
-                </span>
-            <span class="contador" id="spanContador"></span>
-        </div>
+      </div>
+    </section>
+    <section id="tienda">
+      <div class="div-caja-carrito">
         <div class="main-caja">
-            <h2 class="main-div-h">Nuestros Productos</h2>
-            <div class="main-caja-div" id="cajaCard">
+          <h2>Nuestros Productos</h2>
+          <hr>
+          <div class="main-caja-div" id="cajaCard">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="sobreNosotros">
+      <div class="div__container_section-historia">
+        <div class="container__section-hitoria">
+          <h2 class="h2__historia-bienvenida">Sobre Nosotors</h2>
+          <hr>
+          <p class="p__historias-bienvenida">En Tienda Virtual de Frutas ponemos nuestro corazón y alma en
+            todo lo que cultivamos para nuestros clientes, además nos guiamos por nuestros valores para
+            brindar el mejor acompañamiento a
+            todo lo que hacemos. Esperamos poder llegar a todos los espacios, para que te
+            puedas
+            llevar un pedacito de nosotros. Sin importar en dónde estés, te daremos la bienvenida.</p>
+          <div class="caja-img-bienvenida" data-aos="flip-up" data-aos-duration="3000" data-aos-once="true">
+            <img src="assets/img/bienvenida.jpg" alt="Foto-frutas">
+          </div>
+        </div>
+      </div>
+      <div class="div-contenido-sobreNosotros">
+        <h3 class="h__section_principios-historia">Nuestros principios</h3>
+        <p class="p__section_principios-historia">Nos dedicamos a ofrecer y cultivar los mejores productos,
+          seguidos por
+          cuatro valores muy bien formados que son expresados por todos nuestros trabajadores en sus labores
+          diarias, en su toma de decisiones y en sus acciones.</p>
+        <div class="section text-center">
+          <div class="container">
+            <div class="card-columns">
+              <div class="card bg-dark">
+                <img class="card-img" src="assets/img/card-1.jpg" alt="Card image">
+                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
+                  <h4 class="card-title h4Title-nosotros">Compromiso por la calidad</h4>
+                  <p class="card-text mt-0">Somos pasión</p>
+                </div>
+              </div>
+              <div class="card bg-dark">
+                <img class="card-img" src="assets/img/card-2.jpg" alt="Card image">
+                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
+                  <h4 class="card-title h4Title-nosotros">Crea y aprende</h4>
+                  <p class="card-text mt-0">Somos innovación</p>
+                </div>
+              </div>
+              <div class="card bg-dark">
+                <img class="card-img" src="assets/img/card-3.jpg" alt="Card image">
+                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
+                  <h4 class="card-title h4Title-nosotros">La familia primero</h4>
+                  <p class="card-text mt-0">Somos familia</p>
+                </div>
+              </div>
+              <div class="card bg-dark">
+                <img class="card-img" src="assets/img/card-4.jpg" alt="Card image">
+                <div class="card-img-overlay d-flex flex-column align-items-center justify-content-center">
+                  <h4 class="card-title h4Title-nosotros">Sonríe</h4>
+                  <p class="card-text mt-0">Regálale una sonrisa al mundo</p>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        <div>
-            <div class="main-div-btn">
-                <button class="btnAddProduct" id="btnAdd">Cargar Producto</button>
-                <button class="btnActualizar" id="btnAct">Actualizar Producto</button>
-                <button class="btnBorrar" id="btnDel">Borrar Productos</button>
+        <div class="section__siguenos">
+          <hr class="hr__siguenos">
+          <h2 data-aos="fade-right" data-aos-duration="3000" data-aos-once="true" class="h2__Title-siguenos img-caja2">
+            ¡Mantente al día!</h2>
+          <h3 data-aos="fade-left" data-aos-duration="3000" data-aos-once="true" class="h3__Title-siguenos img-caja2">Si
+            quieres saber más de nosotros, te invitamos a seguirnos
+            en nuestras redes sociales</h3>
+          <h4 data-aos="fade-right" data-aos-duration="3000" data-aos-once="true" class="h4__Title-siguenos img-caja2">
+            ¿Qué esperas?</h4>
+        </div>
+      </div>
+    </section>
+    <section id="contacto">
+      <div class="div-contenido-contacto">
+        <h3>Contáctanos</h3>
+        <hr>
+        <div class="row mt-5">
+          <div class="col">
+            <form class="form-horizontal" action="404.html">
+              <fieldset class="container__form_contacto border mx-auto">
+                <legend class="text-center header">Contáctanos a través de este formulario</legend>
+                <div class="form-group row">
+                  <span class="col-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                  <div class="col-8">
+                    <input id="fname" name="name" type="text" placeholder="Nombres" class="form-control" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <span class="col-1 col-md-offset-2 text-center"><i class="fa fa-user bigicon"></i></span>
+                  <div class="col-8">
+                    <input id="lname" name="name" type="text" placeholder="Apellido" class="form-control" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <span class="col-1 col-md-offset-2 text-center"><i class="fa fa-envelope-o bigicon"></i></span>
+                  <div class="col-8">
+                    <input id="email" name="email" type="text" placeholder="Email" class="form-control" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <span class="col-1 col-md-offset-2 text-center"><i class="fa fa-phone-square bigicon"></i></span>
+                  <div class="col-8">
+                    <input id="phone" name="phone" type="text" placeholder="Teléfono" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <span class="col-1 col-md-offset-2 text-center"><i class="fa fa-pencil-square-o bigicon"></i></span>
+                  <div class="col-8">
+                    <textarea class="form-control" id="message" name="message"
+                      placeholder="Introduzca aquí su masaje para nosotros. Nos pondremos en contacto con usted en un plazo de 2 días laborables."
+                      rows="7" required></textarea>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-md-12 text-center">
+                    <button type="submit" class="col-3 btn btn-primary btn-lg">Envíar</button>
+                    <button type="reset" class="col-3 btn btn-primary btn-lg">Borrar</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <div class="col-5 ">
+            <div class="mt-5 mt-2 text__center CajaDiv__contacto-textForm">
+              <h2 class="h2__form_horario">Horario de atención al cliente</h2>
+              <p class="m-4 mb-2">Lunes a viernes de 7:00am a 4:00pm</p>
+              <p class="m-4 mb-2">Sabados de 9:00am a 2:00pm</p>
+              <p class="m-4 mb-5">Domingo de 8:00am a 1:00pm</p>
             </div>
+            <div class="mb-5 text__center CajaDiv__contacto-textForm"">
+              <h2 class=" h2__form_horario">Puedes escribirnos a nuestro correo electrónico</h2>
+              <p class="m-4 mb-2">tiendasvirtuales@pruebanooficial.com</p>
+              <p class="m-4 mb-2">Atención al cliente:</p>
+              <p class="m-4 mb-2">Lunes a viernes de 7:00am a 7:00pm</p>
+              <p class="m-4 mb-2">Sabados de 7:00am a 5:00pm</p>
+            </div>
+          </div>
         </div>
-    </main>
-    <footer>
-        <div class="footer-caja">
-            <h4>Todos los derechos reservados</h4>
-        </div>
-    </footer>
-    <script src="assets/main.js"></script>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="container__footer">
+      <ul class="footer__ul-li">
+        <li class="li__a-links" alt="GitHub"><a class="footer__li_a-links fa-brands fa-github" alt="GitHub"
+            href="https://github.com/jsalamanca3" target="_blank"></a></li>
+        <li class="li__a-links" alt="Facebook"><a class="footer__li_a-links fa-brands fa-facebook" alt="Facebook"
+            href="https://www.facebook.com" target="_blank"></a></li>
+        <li class="li__a-links" alt="Linkedin"><a class="footer__li_a-links fa-brands fa-linkedin" alt="Linkedin"
+            href="https://www.linkedin.com/in/juli%C3%A1n-fernando-salamanca-chac%C3%B3n-5724371ab/"
+            target="_blank"></a></li>
+        <li class="li__a-links" alt="You Tube"><a class="footer__li_a-links fa-brands fa-youtube" alt="You Tube"
+            href="https://www.youtube.com" target="_blank"></a></li>
+      </ul>
+    </div>
+    <p class="footer__p footer__p-margintop">Todos los derechos reservados</p>
+    <p class="footer__p">2023</p>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+  <script src="https://kit.fontawesome.com/bb308e0631.js" crossorigin="anonymous"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
 </body>
+
 </html>
