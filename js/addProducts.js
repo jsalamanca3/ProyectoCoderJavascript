@@ -1,12 +1,13 @@
-const pokemoncaja = document.querySelector("#cajaCard");
+const pokemonCaja = document.querySelector("#cajaCard");
 
 let offset = 1;
-let limit = 17;
+let limit = 15;
 
 function fetchPokemon(id) {
   fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
     .then((res) => res.json())
     .then((data) => {
+      console.log(data);
       crearCard(data);
     })
     .catch((error) => {
@@ -14,8 +15,28 @@ function fetchPokemon(id) {
     });
 }
 
+function fetchPokemonData(id) {
+  fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
+    .then((response) => response.json())
+    .then((data) => {
+      const stats = data.stats;
+      stats.forEach((stat) => {
+        const statName = stat.stat.name;
+        const baseValue = stat.base_stat;
+
+        console.log(`${statName}: ${baseValue}`);
+      });
+    })
+    .catch((error) => {
+      console.log(`Error al obtener los datos del Pokémon ${id}:`, error);
+    });
+}
+
+
+
+
 function traerPokemons(offset, limit) {
-  for (let i = offset; i <= offset + limit; i++) {
+  for (let i = offset; i < offset + limit; i++) {
     fetchPokemon(i);
   }
 }
@@ -34,23 +55,45 @@ function crearCard(pokemonData) {
   card.setAttribute("data-aos-duration", "3000");
   card.setAttribute("data-aos-once", "true");
   card.className = "card zoom-img";
+
+  const statsHtml = pokemonData.stats.map((stat) => {
+    return `<p>${stat.stat.name}: ${stat.base_stat}</p>`;
+  }).join("");
+
   card.innerHTML = `
-    <img src="${pokemonData.sprites.front_default}" alt="">
-    <div class="cardProduct">
-      <h3>${pokemonData.name}</h3>
-      <p>#${pokemonData.id.toString().padStart(3, 0)}</p>
-    </div>
+                  <img src="${pokemonData.sprites.front_default}" alt="">
+                  <div class="cardProduct">
+                    <h3>${pokemonData.name}</h3>
+                    <div class="div-card-btn">
+                      <p>#${pokemonData.id.toString().padStart(3, 0)}</p>
+                      <ul class="div-ul-li-btn">
+                      <li><a href="#"><span class="material-symbols-outlined" id="btn-add">
+                      add_circle
+                      </span></a></li>
+                      <li><a href="#"><span class="material-symbols-outlined" id="btn-act">
+                      autorenew
+                      </span></a></li>
+                      <li><a href="#"><span class="material-symbols-outlined" id="btn-del">
+                      cancel
+                      </span></a></li>
+                      </ul>
+                    </div>
+                    <div class="caja-stats">
+                    ${statsHtml}
+                    </div>
+                  </div>
   `;
-  pokemoncaja.append(card);
+  pokemonCaja.append(card);
 }
 
 traerPokemons(offset, limit);
+console.log(traerPokemons);
 
 const btnAtras = document.querySelector("#btnAtras");
 btnAtras.addEventListener("click", () => {
   if (offset > 1) {
     offset -= limit;
-    removeChildNodes(pokemoncaja);
+    removeChildNodes(pokemonCaja);
     traerPokemons(offset, limit);
   }
 });
@@ -58,7 +101,7 @@ btnAtras.addEventListener("click", () => {
 const btnSiguiente = document.querySelector("#btnSiguiente");
 btnSiguiente.addEventListener("click", () => {
   offset += limit;
-  removeChildNodes(pokemoncaja);
+  removeChildNodes(pokemonCaja);
   traerPokemons(offset, limit);
 });
 
@@ -70,158 +113,6 @@ function removeChildNodes(parent) {
 
 
 
-
-
-/* const pokemoncaja = document.querySelector("#cajaCard");
-
-let offset = 1;
-let limit = 11;
-
-function fetchPokemon(id) {
-  fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-    .then((res) => res.json())
-    .then((data) => {
-      crearCard(data);
-    });
-}
-
-function traerPokemons(offset, limit) {
-  for (let i = offset; i <= offset + limit; i++) {
-    fetchPokemon(i);
-  }
-}
-
-if (localStorage.getItem("pokemons")) {
-  const savedPokemons = JSON.parse(localStorage.getItem("pokemons"));
-  savedPokemons.forEach((pokemonData) => {
-    fetchPokemon(pokemonData.id);
-  });
-}
-
-function crearCard(pokemonData) {
-  const card = document.createElement("div");
-  card.id = `card${pokemonData.id}`;
-  card.setAttribute("data-aos", "fade-up");
-  card.setAttribute("data-aos-duration", "3000");
-  card.setAttribute("data-aos-once", "true");
-  card.className = "card zoom-img";
-  card.innerHTML = `
-    <img src="${pokemonData.sprites.front_default}" alt="">
-    <div class="cardProduct">
-      <h3>${pokemonData.name}</h3>
-      <p>#${pokemonData.id.toString().padStart(3, 0)}</p>
-    </div>
-  `;
-  pokemoncaja.append(card);
-}
-
-traerPokemons(offset, limit);
-
-const btnAtras = document.querySelector("#btnAtras");
-btnAtras.addEventListener("click", () => {
-  if (offset != 1) {
-    offset -= 11;
-    removeChildNodes(pokemoncaja);
-    traerPokemons(offset, limit);
-  }
-});
-
-const btnSiguiente = document.querySelector("#btnSiguiente");
-btnSiguiente.addEventListener("click", () => {
-  offset += 11;
-  removeChildNodes(pokemoncaja);
-  traerPokemons(offset, limit);
-});
-
-function removeChildNodes(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
-}
- */
-
-
-
-
-
-
-/* const pokemoncaja = document.querySelector("#cajaCard");
-
-let offset = 1;
-let limit = 11;
-
-function fetchPokemon(id) {
-  fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-    .then((res) => res.json())
-    .then((data) => {
-      crearCard(data);
-    });
-}
-
-function traerPokemons(offset, limit) {
-  for (let i = offset; i < offset + limit; i++) {
-    fetchPokemon(i);
-  }
-}
-
-if (localStorage.getItem("pokemons")) {
-  const savedPokemons = JSON.parse(localStorage.getItem("pokemons"));
-  savedPokemons.forEach((pokemon) => {
-    crearCard(pokemon);
-  });
-}
-
-const crearCard = (pokemon) => {
-  const cajaCard = document.querySelector("#cajaCard");
-
-  const savedPokemons = localStorage.getItem("pokemons")
-    ? JSON.parse(localStorage.getItem("pokemons"))
-    : [];
-  if (!savedPokemons.some((savedPokemon) => savedPokemon.id === pokemon.id)) {
-    savedPokemons.push(pokemon);
-  }
-
-  localStorage.setItem("pokemons", JSON.stringify(savedPokemons));
-
-  const card = document.createElement("div");
-  card.id = `card${pokemon.id}`;
-  card.setAttribute("data-aos", "fade-up");
-  card.setAttribute("data-aos-duration", "3000");
-  card.setAttribute("data-aos-once", "true");
-  card.className = "card zoom-img";
-  card.innerHTML = `
-                      <img src="${pokemon.sprites.front_default}" alt="">
-                      <div class="cardProduct">
-                          <h3>${pokemon.name}</h3>
-                          <p> #${pokemon.id.toString().padStart(3, 0)}</p>
-                      </div>
-  `;
-  cajaCard.append(card);
-};
-
-traerPokemons(offset, limit);
-
-const btnAtras = document.querySelector("#btnAtras");
-btnAtras.addEventListener("click", () => {
-  if (offset != 1) {
-    offset -= 11;
-    removeChildNodes(cajaCard);
-    traerPokemons(offset, limit);
-  }
-});
-
-const btnSiguiente = document.querySelector("#btnSiguiente");
-btnSiguiente.addEventListener("click", () => {
-  offset += 11;
-  removeChildNodes(cajaCard);
-  traerPokemons(offset, limit);
-});
-
-function removeChildNodes(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
-} */
 
 
 
