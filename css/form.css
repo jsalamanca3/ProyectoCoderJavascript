@@ -2,13 +2,13 @@ body {
     background: var(--color-background-sections);
 }
 .header {
-    color: #36A0FF;
+    color: #2c2d2e;
     font-size: 25px;
     padding: 10px;
 }
 .bigicon {
     font-size: 25px;
-    color: #36A0FF;
+    color: #353636;
 }
 .container__form_contacto {
     margin-top: 20px;

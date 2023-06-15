@@ -17,26 +17,16 @@ html body {
 }
 
 header, header .header-caja {
-  position: fixed;
   width: 100%;
-  height: 140px;
-  left: 0;
-  top: 0;
+  height: 120px;
   background-color: #344A53;
-  z-index: 10;
 }
 header .header-caja {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 0.5fr;
-  background-image: url(./../assets/img/header.png);
+  background-image: url(./../assets/img/header.jpg);
   background-repeat: no-repeat;
   background-size: cover;
 }
 header .header-caja .header-div-logo {
-  display: grid;
-  justify-items: center;
-  grid-area: 1/1/2/4;
   text-align: center;
 }
 header .header-caja .header-div-logo .header-div-logo-h {
@@ -47,17 +37,33 @@ header .header-caja .header-div-logo .header-div-logo-h {
   color: #0468bf;
 }
 header .header-caja .header-div-nav {
-  grid-area: 2/1/3/4;
-}
-header .header-caja .header-div-nav .div-nav {
+  display: flex;
+  flex-direction: row;
   width: 100%;
   height: auto;
+  justify-content: center;
+  align-items: center;
+}
+header .header-caja .header-div-nav .div-nav {
+  position: fixed;
+  display: flex;
+  width: 100%;
+  max-width: 768px;
+  height: 5rem;
+  padding: 0 2%;
+  bottom: 0px;
+  align-items: flex-end;
+  z-index: 3;
+  background-color: #0e6ba8;
+  border-radius: 35px 35px 5px 5px;
 }
 header .header-caja .header-div-nav .div-nav .nav-ul {
   display: flex;
+  width: 100%;
+  height: auto;
   flex-direction: row;
   gap: 12px;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   font-size: 1.8rem;
   font-family: "Merriweather", serif;
@@ -70,11 +76,7 @@ header .header-caja .header-div-nav .div-nav .nav-ul .nav-ul-li-a, header .heade
   text-decoration: none;
 }
 header .header-caja .header-div-nav .div-nav .nav-ul .nav-ul-li-a:hover {
-  color: #0e6ba8;
-}
-
-body {
-  padding-top: 140px;
+  color: #1b2021;
 }
 
 main section .main-caja-div-contenido {
@@ -238,10 +240,11 @@ main section .div-caja-carrito .main-caja .main-caja-div {
   width: 100%;
   height: auto;
   gap: 25px;
+  padding: 0 1%;
   justify-content: center;
 }
 main section .div-caja-carrito .main-caja .main-caja-div .card {
-  width: 20%;
+  width: 15%;
   height: auto;
   margin-bottom: 20px;
   border-radius: 15px;
@@ -267,8 +270,6 @@ main section .div-caja-carrito .main-caja .main-caja-div img {
   width: 100%;
   height: auto;
   background-size: cover;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
 }
 main section .div-caja-carrito .main-caja .main-caja-div .cardProduct {
   padding: 2% 4%;
@@ -289,8 +290,6 @@ main section .div-caja-carrito .main-caja .main-caja-div input {
   font-weight: 700;
   color: #212529;
 }
-main section .div-caja-carrito .main-caja .main-caja-div input[type=number]::-webkit-inner-spin-button,
-main section .div-caja-carrito .main-caja .main-caja-div input[type=number]::-webkit-outer-spin-button,
 main section .div-caja-carrito .main-caja .main-caja-div form button {
   width: 70%;
   height: 40px;
@@ -308,6 +307,36 @@ main section .div-caja-carrito .main-caja .main-caja-div .zoom-img:hover {
 main section .div-caja-carrito .main-caja #cajaCard {
   width: 100%;
   height: auto;
+}
+main section .div-caja-carrito .main-caja .main-caja-div-btn {
+  width: 100%;
+  height: auto;
+  padding: 0 2%;
+}
+main section .div-caja-carrito .main-caja .main-caja-div-btn .div-ul-btn {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  justify-content: center;
+  align-items: center;
+}
+main section .div-caja-carrito .main-caja .main-caja-div-btn .div-ul-btn li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  height: 45px;
+  list-style: none;
+  text-decoration: none;
+  background-color: #0e6ba8;
+}
+main section .div-caja-carrito .main-caja .main-caja-div-btn .div-ul-btn li a {
+  text-decoration: none;
+  font-size: 1.8rem;
+  font-family: "Merriweather", serif;
+  font-weight: 500;
+  color: #e6e8e6;
 }
 
 main section .div__container_section-historia {
@@ -667,7 +696,7 @@ footer .footer__p-margintop {
   margin-top: 45px;
 }
 footer .footer__p {
-  margin-bottom: 0.5%;
+  margin-bottom: 1.5%;
   font-size: 1.4rem;
   font-family: "Merriweather", serif;
   font-weight: 400;
