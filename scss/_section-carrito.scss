@@ -76,17 +76,19 @@ main {
                 align-items: center;
                 li{
                   list-style: none;
-                  a {
+                  button {
                     text-decoration: none;
-                    #btn-add:hover {
+                    border: none;
+                    background: none;
+                    #span-add:hover {
                       color: #0aff02;
                       filter: drop-shadow(0 0 6px #181719);
                     }
-                    #btn-act:hover {
+                    #span-act:hover {
                       color: #1525ff;
                       filter: drop-shadow(0 0 6px #181719);
                     }
-                    #btn-del:hover {
+                    #span-del:hover {
                       color: #ff0000;
                       filter: drop-shadow(0 0 6px #181719);
                     }

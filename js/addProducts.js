@@ -1,4 +1,5 @@
 const pokemonCaja = document.querySelector("#cajaCard");
+const pokemons = JSON.parse(localStorage.getItem("pokemons")) || {};
 
 let offset = 1;
 let limit = 15;
@@ -8,14 +9,28 @@ function fetchPokemon(id) {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-      crearCard(data);
+      if (!isPokemonExist(data)) {
+        const pokemonData = {
+          id: data.id,
+          name: data.name,
+          sprites: {
+            front_default: data.sprites && data.sprites.front_default ? data.sprites.front_default : '',
+          },
+          stats: [],
+        };
+        fetchPokemonData(id, pokemonData);
+      }
     })
     .catch((error) => {
       console.log(`Error al obtener los datos del Pokémon ${id}:`, error);
     });
 }
 
-function fetchPokemonData(id) {
+function isPokemonExist(pokemonData) {
+  return pokemons.hasOwnProperty(pokemonData.id);
+}
+
+function fetchPokemonData(id, pokemonData) {
   fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
     .then((response) => response.json())
     .then((data) => {
@@ -26,14 +41,18 @@ function fetchPokemonData(id) {
 
         console.log(`${statName}: ${baseValue}`);
       });
+
+      pokemonData.stats = stats;
+
+      pokemons[id] = pokemonData;
+      localStorage.setItem("pokemons", JSON.stringify(pokemons));
+
+      crearCard(pokemonData);
     })
     .catch((error) => {
       console.log(`Error al obtener los datos del Pokémon ${id}:`, error);
     });
 }
-
-
-
 
 function traerPokemons(offset, limit) {
   for (let i = offset; i < offset + limit; i++) {
@@ -43,7 +62,7 @@ function traerPokemons(offset, limit) {
 
 if (localStorage.getItem("pokemons")) {
   const savedPokemons = JSON.parse(localStorage.getItem("pokemons"));
-  savedPokemons.forEach((pokemonData) => {
+  Object.values(savedPokemons).forEach((pokemonData) => {
     crearCard(pokemonData);
   });
 }
@@ -56,39 +75,82 @@ function crearCard(pokemonData) {
   card.setAttribute("data-aos-once", "true");
   card.className = "card zoom-img";
 
-  const statsHtml = pokemonData.stats.map((stat) => {
-    return `<p>${stat.stat.name}: ${stat.base_stat}</p>`;
-  }).join("");
+  const statsHtml = pokemonData.stats && Array.isArray(pokemonData.stats)
+    ? pokemonData.stats
+        .map((stat) => `<p>${stat.stat.name}: ${stat.base_stat}</p>`)
+        .join("")
+    : "";
 
   card.innerHTML = `
-                  <img src="${pokemonData.sprites.front_default}" alt="">
-                  <div class="cardProduct">
-                    <h3>${pokemonData.name}</h3>
-                    <div class="div-card-btn">
-                      <p>#${pokemonData.id.toString().padStart(3, 0)}</p>
-                      <ul class="div-ul-li-btn">
-                      <li><a href="#"><span class="material-symbols-outlined" id="btn-add">
-                      add_circle
-                      </span></a></li>
-                      <li><a href="#"><span class="material-symbols-outlined" id="btn-act">
-                      autorenew
-                      </span></a></li>
-                      <li><a href="#"><span class="material-symbols-outlined" id="btn-del">
-                      cancel
-                      </span></a></li>
-                      </ul>
-                    </div>
-                    <div class="caja-stats">
-                    ${statsHtml}
-                    </div>
-                  </div>
+    <img src="${pokemonData.sprites && pokemonData.sprites.front_default ? pokemonData.sprites.front_default : ''}" alt="">
+    <div class="cardProduct">
+      <h3>${pokemonData.name}</h3>
+      <div class="div-card-btn">
+        <p>#${pokemonData.id.toString().padStart(3, 0)}</p>
+        <ul class="div-ul-li-btn">
+          <li>
+            <button class="btn-add">
+              <span class="material-symbols-outlined" id="span-add">
+                add_circle
+              </span>
+            </button>
+          </li>
+          <li>
+            <button class="btn-act">
+              <span class="material-symbols-outlined" id="span-act">
+                autorenew
+              </span>
+            </button>
+          </li>
+          <li>
+            <button class="btn-del">
+              <span class="material-symbols-outlined" id="span-del">
+                cancel
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+      <div class="caja-stats">
+        ${statsHtml}
+      </div>
+    </div>
   `;
   pokemonCaja.append(card);
+
+  const addButton = card.querySelector(".btn-add");
+  const updateButton = card.querySelector(".btn-act");
+  const deleteButton = card.querySelector(".btn-del");
+
+  addButton.addEventListener("click", () => {
+    const id = card.id.substring(4);
+    const pokemonData = {
+      id: parseInt(id),
+      name: card.querySelector("h3").textContent,
+      sprites: {
+        front_default: card.querySelector("img").getAttribute("src"),
+      },
+      stats: pokemons[id].stats || [],
+    };
+    addPokemon(pokemonData);
+  });
+
+  updateButton.addEventListener("click", () => {
+    alert("¡Ohh! Vas a actualizar un Pokémon");
+    const name = prompt("Ingrese el nombre del Pokémon para actualizar").toLowerCase();
+    actualizarPokemon(name);
+  });
+
+  deleteButton.addEventListener("click", () => {
+    alert("¡Ohh! Vas a eliminar un Pokémon");
+    const name = prompt("Ingrese el nombre del Pokémon a eliminar").toLowerCase();
+    deletePokemon(name);
+  });
 }
 
 traerPokemons(offset, limit);
-console.log(traerPokemons);
 
+//btn siguiente - atras
 const btnAtras = document.querySelector("#btnAtras");
 btnAtras.addEventListener("click", () => {
   if (offset > 1) {
@@ -111,232 +173,68 @@ function removeChildNodes(parent) {
   }
 }
 
+class Poke {
+  constructor(id, name, img) {
+    this.id = id;
+    this.name = name;
+    this.img = img;
+  }
 
-
-
-
-
-/* 
-
-async function agregarPokemon(nombre, tipo, altura, peso, habilidades, img) {
-  try {
-    const response = await fetch(apiUrl + "pokemon", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: nombre,
-        type: tipo,
-        height: altura,
-        weight: peso,
-        abilities: habilidades,
-        img: img,
-      }),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error al agregar el Pokémon:", error);
-    throw error;
+  static guardarPokemon() {
+    localStorage.setItem("pokemons", JSON.stringify(pokemons));
   }
 }
 
-async function editarPokemon(
-  pokemonId,
-  nombre,
-  tipo,
-  altura,
-  peso,
-  habilidades,
-  img
-) {
-  try {
-    const response = await fetch(`${apiUrl}pokemon/${pokemonId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: nombre,
-        type: tipo,
-        height: altura,
-        weight: peso,
-        abilities: habilidades,
-        img: img,
-      }),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error al editar el Pokémon:", error);
-    throw error;
-  }
-}
-
-async function eliminarPokemon(pokemonId) {
-  try {
-    const response = await fetch(`${apiUrl}pokemon/${pokemonId}`, {
-      method: "DELETE",
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error al eliminar el Pokémon:", error);
-    throw error;
-  }
-}
-
-// Obtener datos de un Pokémon por ID
-const pokemonId = 25;
-getPokemonData(pokemonId)
-  .then((pokemon) => {
-    console.log("Nombre:", pokemon.name);
-    console.log("Altura:", pokemon.height);
-    console.log("Peso:", pokemon.weight);
-    console.log("Habilidades:", pokemon.abilities);
-    console.log("Tipos:", pokemon.types);
-    // Realizar acciones con los datos del Pokémon obtenido
-  })
-  .catch((error) => {
-    // Manejo de errores
+function verPokemon() {
+  const existingCards = Array.from(pokemonCaja.children).map((card) => card.id);
+  Object.values(pokemons).forEach((pokemon) => {
+    const cardId = `card${pokemon.id}`;
+    if (!existingCards.includes(cardId)) {
+      crearCard(pokemon);
+    }
   });
+}
+verPokemon();
 
-// Traer lista de Pokémon
-const offset = 0;
-const limit = 10;
-traerPokemons(offset, limit)
-  .then((pokemons) => {
-    console.log("Lista de Pokémon:", pokemons);
-    // Realizar acciones con la lista de Pokémon obtenida
-  })
-  .catch((error) => {
-    //
-  });
+function addPokemon(pokemonData) {
+  if (pokemons.hasOwnProperty(pokemonData.id)) {
+    console.log("El Pokémon ya existe:", pokemonData);
+    return;
+  }
 
-// Añadir nuevo Pokémon
-async function agregarPokemon(nombre, tipo, altura, peso, habilidades, img) {
-  try {
-    const response = await fetch(apiUrl + "pokemon", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: nombre,
-        type: tipo,
-        height: altura,
-        weight: peso,
-        abilities: habilidades,
-        img: img,
-      }),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error al agregar el Pokémon:", error);
-    throw error;
+  const pokemon = new Poke(
+    pokemonData.id,
+    pokemonData.name,
+    pokemonData.sprites.front_default
+  );
+
+  pokemons[pokemonData.id] = pokemon;
+  Poke.guardarPokemon();
+
+  verPokemon();
+  console.log("Se ha agregado un Pokémon:", pokemonData);
+}
+
+function actualizarPokemon(name) {
+  const pokemonId = Object.keys(pokemons).find((id) => pokemons[id].name === name);
+  if (pokemonId) {
+    const updatedPokemonData = { ...pokemons[pokemonId] };
+    fetchPokemonData(pokemonId, updatedPokemonData);
+  } else {
+    console.log(`No se encontró ningún Pokémon con el nombre "${name}"`);
   }
 }
 
-// Editar Pokémon existente
-async function editarPokemon(
-  pokemonId,
-  nombre,
-  tipo,
-  altura,
-  peso,
-  habilidades,
-  img
-) {
-  try {
-    const response = await fetch(`${apiUrl}pokemon/${pokemonId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: nombre,
-        type: tipo,
-        height: altura,
-        weight: peso,
-        abilities: habilidades,
-        img: img,
-      }),
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error al editar el Pokémon:", error);
-    throw error;
+function deletePokemon(name) {
+  const pokemonId = Object.keys(pokemons).find((id) => pokemons[id].name === name);
+  if (pokemonId) {
+    delete pokemons[pokemonId];
+    localStorage.removeItem(`pokemons_${pokemonId}`);
+    Poke.guardarPokemon();
+    const cardToRemove = document.querySelector(`#card${pokemonId}`);
+    cardToRemove.remove();
+    console.log(`Se ha eliminado el Pokémon "${name}"`);
+  } else {
+    console.log(`No se encontró ningún Pokémon con el nombre "${name}"`);
   }
 }
-
-// Eliminar Pokémon existente
-async function eliminarPokemon(pokemonId) {
-  try {
-    const response = await fetch(`${apiUrl}pokemon/${pokemonId}`, {
-      method: "DELETE",
-    });
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Error al eliminar el Pokémon:", error);
-    throw error;
-  }
-}
-
-
-
-
-
-// Agregar un nuevo Pokémon
-agregarPokemon(
-  "Charizard",
-  "Fire",
-  1.7,
-  90.5,
-  ["Blaze", "Solar Power"],
-  "https://example.com/charizard.png"
-)
-  .then((pokemon) => {
-    console.log("Pokémon agregado:", pokemon);
-    // Realizar acciones después de agregar el Pokémon
-  })
-  .catch((error) => {
-    // Manejo de errores
-  });
-
-// Editar un Pokémon existente
-const pokemonId = 25;
-editarPokemon(
-  pokemonId,
-  "Pikachu",
-  "Electric",
-  0.4,
-  6,
-  ["Static"],
-  "https://example.com/pikachu.png"
-)
-  .then((pokemon) => {
-    console.log("Pokémon editado:", pokemon);
-    // Realizar acciones después de editar el Pokémon
-  })
-  .catch((error) => {
-    // Manejo de errores
-  });
-
-// Eliminar un Pokémon existente
-const pokemonId = 25;
-eliminarPokemon(pokemonId)
-  .then((response) => {
-    console.log("Pokémon eliminado:", response);
-    // Realizar acciones después de eliminar el Pokémon
-  })
-  .catch((error) => {
-    // Manejo de errores
-  });
-
-// ...
-
- */

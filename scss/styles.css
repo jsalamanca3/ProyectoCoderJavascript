@@ -282,18 +282,20 @@ main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul 
 main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul li {
   list-style: none;
 }
-main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul li a {
+main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul li button {
   text-decoration: none;
+  border: none;
+  background: none;
 }
-main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul li a #btn-add:hover {
+main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul li button #span-add:hover {
   color: #0aff02;
   filter: drop-shadow(0 0 6px #181719);
 }
-main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul li a #btn-act:hover {
+main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul li button #span-act:hover {
   color: #1525ff;
   filter: drop-shadow(0 0 6px #181719);
 }
-main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul li a #btn-del:hover {
+main section .div-caja-carrito .main-caja .main-caja-div .card .div-card-btn ul li button #span-del:hover {
   color: #ff0000;
   filter: drop-shadow(0 0 6px #181719);
 }
