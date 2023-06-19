@@ -221,11 +221,14 @@ function agregarPokemonEliminado(name) {
 
   if (pokemon) {
     pokemon.eliminado = false;
-    Poke.guardarPokemon();
+    localStorage.setItem("pokemons", JSON.stringify(pokemons));
     verPokemon();
+
     alert(`El Pokémon ${pokemon.name} fue agregado`);
 
     verificarEliminados();
+
+    location.reload();
   } else {
     alert(`No se encontró el Pokémon eliminado ${name}`);
   }
