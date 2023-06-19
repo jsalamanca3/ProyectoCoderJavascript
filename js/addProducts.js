@@ -1,8 +1,8 @@
 const pokemonCaja = document.querySelector("#cajaCard");
 const pokemons = JSON.parse(localStorage.getItem("pokemons")) || {};
 
-let offset = 1;
-let limit = 15;
+let pagina = 1;
+const limit = 15;
 
 function fetchPokemon(id) {
   fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
@@ -48,24 +48,35 @@ function fetchPokemonData(id, pokemonData) {
       localStorage.setItem("pokemons", JSON.stringify(pokemons));
 
       crearCard(pokemonData);
+
     })
     .catch((error) => {
       console.log(`Error al obtener los datos del Pokémon ${id}:`, error);
     });
 }
 
-function traerPokemons(offset, limit) {
-  for (let i = offset; i < offset + limit; i++) {
-    fetchPokemon(i);
+function traerPokemons() {
+  const offset = (pagina - 1) * limit;
+  const finalId = offset + limit;
+
+  for (let i = offset + 1; i <= finalId; i++) {
+    if (!pokemons[i]) {
+      fetchPokemon(i);
+    }
   }
+
+  removeChildNodes(pokemonCaja);
+  Object.values(pokemons).slice(offset, finalId).forEach((pokemonData) => {
+    crearCard(pokemonData);
+  });
 }
 
-if (localStorage.getItem("pokemons")) {
+/* if (localStorage.getItem("pokemons")) {
   const savedPokemons = JSON.parse(localStorage.getItem("pokemons"));
   Object.values(savedPokemons).forEach((pokemonData) => {
     crearCard(pokemonData);
   });
-}
+} */
 
 function crearCard(pokemonData) {
   const card = document.createElement("div");
@@ -148,28 +159,27 @@ function crearCard(pokemonData) {
   });
 }
 
-traerPokemons(offset, limit);
+traerPokemons();
 
-//btn siguiente - atras
-const btnAtras = document.querySelector("#btnAtras");
-btnAtras.addEventListener("click", () => {
-  if (offset > 1) {
-    offset -= limit;
-    removeChildNodes(pokemonCaja);
-    traerPokemons(offset, limit);
-  }
-});
-
+// Evento del botón "Siguiente"
 const btnSiguiente = document.querySelector("#btnSiguiente");
 btnSiguiente.addEventListener("click", () => {
-  offset += limit;
-  removeChildNodes(pokemonCaja);
-  traerPokemons(offset, limit);
+  pagina++;
+  traerPokemons();
+});
+
+// Evento del botón "Atrás"
+const btnAtras = document.querySelector("#btnAtras");
+btnAtras.addEventListener("click", () => {
+  if (pagina > 1) {
+    pagina--;
+    traerPokemons();
+  }
 });
 
 function removeChildNodes(parent) {
   while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
+    parent.firstChild.remove();
   }
 }
 
