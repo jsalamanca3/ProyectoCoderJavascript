@@ -4,6 +4,12 @@ const pokemons = JSON.parse(localStorage.getItem("pokemons")) || {};
 let pagina = 1;
 const limit = 15;
 
+if (Object.keys(pokemons).length > 0) {
+  window.addEventListener("beforeunload", function(event) {
+    traerPokemons();
+  });
+}
+
 function fetchPokemon(id) {
   fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
     .then((res) => res.json())
@@ -17,6 +23,7 @@ function fetchPokemon(id) {
             front_default: data.sprites && data.sprites.front_default ? data.sprites.front_default : '',
           },
           stats: [],
+          eliminado: false, // Nueva propiedad "eliminado" inicializada en falso
         };
         fetchPokemonData(id, pokemonData);
       }
@@ -55,8 +62,14 @@ function fetchPokemonData(id, pokemonData) {
     });
 }
 
+let pageNumber = parseInt(localStorage.getItem("pageNumber")) || 1;
+
+function guardarPaginaActual() {
+  localStorage.setItem("pageNumber", pageNumber.toString());
+}
+
 function traerPokemons() {
-  const offset = (pagina - 1) * limit;
+  const offset = (pageNumber - 1) * limit;
   const finalId = offset + limit;
 
   for (let i = offset + 1; i <= finalId; i++) {
@@ -66,17 +79,34 @@ function traerPokemons() {
   }
 
   removeChildNodes(pokemonCaja);
-  Object.values(pokemons).slice(offset, finalId).forEach((pokemonData) => {
-    crearCard(pokemonData);
-  });
+  Object.values(pokemons)
+    .filter((pokemonData) => !pokemonData.eliminado && pokemonData.id >= offset + 1 && pokemonData.id <= finalId)
+    .forEach((pokemonData) => {
+      crearCard(pokemonData);
+    });
 }
 
-/* if (localStorage.getItem("pokemons")) {
-  const savedPokemons = JSON.parse(localStorage.getItem("pokemons"));
-  Object.values(savedPokemons).forEach((pokemonData) => {
-    crearCard(pokemonData);
+document.addEventListener("DOMContentLoaded", function() {
+  verPokemon();
+
+  const btnSiguiente = document.querySelector("#btnSiguiente");
+  btnSiguiente.addEventListener("click", () => {
+    pageNumber++;
+    guardarPaginaActual();
+    traerPokemons();
   });
-} */
+
+  const btnAtras = document.querySelector("#btnAtras");
+  btnAtras.addEventListener("click", () => {
+    if (pageNumber > 1) {
+      pageNumber--;
+      guardarPaginaActual();
+      traerPokemons();
+    }
+  });
+
+  traerPokemons();
+});
 
 function crearCard(pokemonData) {
   const card = document.createElement("div");
@@ -159,24 +189,6 @@ function crearCard(pokemonData) {
   });
 }
 
-traerPokemons();
-
-// Evento del botón "Siguiente"
-const btnSiguiente = document.querySelector("#btnSiguiente");
-btnSiguiente.addEventListener("click", () => {
-  pagina++;
-  traerPokemons();
-});
-
-// Evento del botón "Atrás"
-const btnAtras = document.querySelector("#btnAtras");
-btnAtras.addEventListener("click", () => {
-  if (pagina > 1) {
-    pagina--;
-    traerPokemons();
-  }
-});
-
 function removeChildNodes(parent) {
   while (parent.firstChild) {
     parent.firstChild.remove();
@@ -187,24 +199,17 @@ class Poke {
   constructor(id, name, img) {
     this.id = id;
     this.name = name;
-    this.img = img;
+    this.sprites = {
+      front_default: img
+    };
+    this.stats = [];
+    this.eliminado = false; // Nueva propiedad "eliminado" inicializada en falso
   }
 
   static guardarPokemon() {
     localStorage.setItem("pokemons", JSON.stringify(pokemons));
   }
 }
-
-function verPokemon() {
-  const existingCards = Array.from(pokemonCaja.children).map((card) => card.id);
-  Object.values(pokemons).forEach((pokemon) => {
-    const cardId = `card${pokemon.id}`;
-    if (!existingCards.includes(cardId)) {
-      crearCard(pokemon);
-    }
-  });
-}
-verPokemon();
 
 function addPokemon(pokemonData) {
   if (pokemons.hasOwnProperty(pokemonData.id)) {
@@ -225,6 +230,16 @@ function addPokemon(pokemonData) {
   console.log("Se ha agregado un Pokémon:", pokemonData);
 }
 
+function verPokemon() {
+  const existingCards = Array.from(pokemonCaja.children).map((card) => card.id);
+  Object.values(pokemons).forEach((pokemon) => {
+    const cardId = `card${pokemon.id}`;
+    if (!existingCards.includes(cardId) && !pokemon.eliminado) { // Agregar la condición de "eliminado"
+      crearCard(pokemon);
+    }
+  });
+}
+
 function actualizarPokemon(name) {
   const pokemonId = Object.keys(pokemons).find((id) => pokemons[id].name === name);
   if (pokemonId) {
@@ -238,13 +253,14 @@ function actualizarPokemon(name) {
 function deletePokemon(name) {
   const pokemonId = Object.keys(pokemons).find((id) => pokemons[id].name === name);
   if (pokemonId) {
-    delete pokemons[pokemonId];
-    localStorage.removeItem(`pokemons_${pokemonId}`);
-    Poke.guardarPokemon();
     const cardToRemove = document.querySelector(`#card${pokemonId}`);
     cardToRemove.remove();
+    pokemons[pokemonId].eliminado = true; // Marcar el Pokémon como eliminado en el objeto "pokemons"
+    localStorage.setItem("pokemons", JSON.stringify(pokemons)); // Actualizar el almacenamiento local
     console.log(`Se ha eliminado el Pokémon "${name}"`);
   } else {
     console.log(`No se encontró ningún Pokémon con el nombre "${name}"`);
   }
 }
+
+traerPokemons();
