@@ -5,7 +5,7 @@ let pagina = 1;
 const limit = 15;
 
 if (Object.keys(pokemons).length > 0) {
-  window.addEventListener("beforeunload", function(event) {
+  window.addEventListener("beforeunload", function (event) {
     traerPokemons();
   });
 }
@@ -20,10 +20,13 @@ function fetchPokemon(id) {
           id: data.id,
           name: data.name,
           sprites: {
-            front_default: data.sprites && data.sprites.front_default ? data.sprites.front_default : '',
+            front_default:
+              data.sprites && data.sprites.front_default
+                ? data.sprites.front_default
+                : "",
           },
           stats: [],
-          eliminado: false, // Nueva propiedad "eliminado" inicializada en falso
+          eliminado: false,
         };
         fetchPokemonData(id, pokemonData);
       }
@@ -55,7 +58,6 @@ function fetchPokemonData(id, pokemonData) {
       localStorage.setItem("pokemons", JSON.stringify(pokemons));
 
       crearCard(pokemonData);
-
     })
     .catch((error) => {
       console.log(`Error al obtener los datos del Pokémon ${id}:`, error);
@@ -80,13 +82,18 @@ function traerPokemons() {
 
   removeChildNodes(pokemonCaja);
   Object.values(pokemons)
-    .filter((pokemonData) => !pokemonData.eliminado && pokemonData.id >= offset + 1 && pokemonData.id <= finalId)
+    .filter(
+      (pokemonData) =>
+        pokemonData.id >= offset + 1 &&
+        pokemonData.id <= finalId &&
+        !pokemonData.eliminado
+    )
     .forEach((pokemonData) => {
       crearCard(pokemonData);
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
   verPokemon();
 
   const btnSiguiente = document.querySelector("#btnSiguiente");
@@ -105,6 +112,14 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+  const btnAddPokemon = document.querySelector("#btn-add-pokemon");
+  btnAddPokemon.addEventListener("click", () => {
+    const name = prompt(
+      "Ingrese el nombre del Pokémon a agregar"
+    ).toLowerCase();
+    agregarPokemonEliminado(name);
+  });
+
   traerPokemons();
 });
 
@@ -116,76 +131,63 @@ function crearCard(pokemonData) {
   card.setAttribute("data-aos-once", "true");
   card.className = "card zoom-img";
 
-  const statsHtml = pokemonData.stats && Array.isArray(pokemonData.stats)
-    ? pokemonData.stats
-        .map((stat) => `<p>${stat.stat.name}: ${stat.base_stat}</p>`)
-        .join("")
-    : "";
+  const statsHtml =
+    pokemonData.stats && Array.isArray(pokemonData.stats)
+      ? pokemonData.stats
+          .map((stat) => `<p>${stat.stat.name}: ${stat.base_stat}</p>`)
+          .join("")
+      : "";
 
   card.innerHTML = `
-    <img src="${pokemonData.sprites && pokemonData.sprites.front_default ? pokemonData.sprites.front_default : ''}" alt="">
-    <div class="cardProduct">
-      <h3>${pokemonData.name}</h3>
-      <div class="div-card-btn">
-        <p>#${pokemonData.id.toString().padStart(3, 0)}</p>
-        <ul class="div-ul-li-btn">
-          <li>
-            <button class="btn-add">
-              <span class="material-symbols-outlined" id="span-add">
-                add_circle
-              </span>
-            </button>
-          </li>
-          <li>
-            <button class="btn-act">
-              <span class="material-symbols-outlined" id="span-act">
-                autorenew
-              </span>
-            </button>
-          </li>
-          <li>
-            <button class="btn-del">
-              <span class="material-symbols-outlined" id="span-del">
-                cancel
-              </span>
-            </button>
-          </li>
-        </ul>
-      </div>
-      <div class="caja-stats">
-        ${statsHtml}
-      </div>
-    </div>
-  `;
+                    <img src="${
+                      pokemonData.sprites && pokemonData.sprites.front_default
+                        ? pokemonData.sprites.front_default
+                        : ""
+                    }" alt="">
+                    <div class="cardProduct">
+                      <h3>${pokemonData.name}</h3>
+                      <div class="div-card-btn">
+                        <p>#${pokemonData.id.toString().padStart(3, 0)}</p>
+                        <ul class="div-ul-li-btn">
+                          <li>
+                            <button class="btn-act">
+                              <span class="material-symbols-outlined" id="span-act">
+                                autorenew
+                              </span>
+                            </button>
+                          </li>
+                          <li>
+                            <button class="btn-del">
+                              <span class="material-symbols-outlined" id="span-del">
+                                cancel
+                              </span>
+                            </button>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="caja-stats">
+                        ${statsHtml}
+                      </div>
+                    </div>
+                  `;
   pokemonCaja.append(card);
 
-  const addButton = card.querySelector(".btn-add");
   const updateButton = card.querySelector(".btn-act");
   const deleteButton = card.querySelector(".btn-del");
 
-  addButton.addEventListener("click", () => {
-    const id = card.id.substring(4);
-    const pokemonData = {
-      id: parseInt(id),
-      name: card.querySelector("h3").textContent,
-      sprites: {
-        front_default: card.querySelector("img").getAttribute("src"),
-      },
-      stats: pokemons[id].stats || [],
-    };
-    addPokemon(pokemonData);
-  });
-
   updateButton.addEventListener("click", () => {
-    alert("¡Ohh! Vas a actualizar un Pokémon");
-    const name = prompt("Ingrese el nombre del Pokémon para actualizar").toLowerCase();
-    actualizarPokemon(name);
+    const name = prompt(
+      "Ingrese el nombre del Pokémon para actualizar"
+    ).toLowerCase();
+    if (name) {
+      alert(`Vas a actualizar el Pokémon ${name}`);
+      actualizarPokemon(name);
+    }
   });
 
   deleteButton.addEventListener("click", () => {
-    alert("¡Ohh! Vas a eliminar un Pokémon");
-    const name = prompt("Ingrese el nombre del Pokémon a eliminar").toLowerCase();
-    deletePokemon(name);
+    const name = pokemonData.name.toLowerCase();
+    eliminarPokemon(name);
   });
 }
 
@@ -200,10 +202,10 @@ class Poke {
     this.id = id;
     this.name = name;
     this.sprites = {
-      front_default: img
+      front_default: img,
     };
     this.stats = [];
-    this.eliminado = false; // Nueva propiedad "eliminado" inicializada en falso
+    this.eliminado = false;
   }
 
   static guardarPokemon() {
@@ -211,56 +213,128 @@ class Poke {
   }
 }
 
-function addPokemon(pokemonData) {
-  if (pokemons.hasOwnProperty(pokemonData.id)) {
-    console.log("El Pokémon ya existe:", pokemonData);
-    return;
-  }
-
-  const pokemon = new Poke(
-    pokemonData.id,
-    pokemonData.name,
-    pokemonData.sprites.front_default
+function agregarPokemonEliminado(name) {
+  const pokemon = Object.values(pokemons).find(
+    (pokemon) =>
+      pokemon.name.toLowerCase() === name && pokemon.eliminado === true
   );
 
-  pokemons[pokemonData.id] = pokemon;
-  Poke.guardarPokemon();
+  if (pokemon) {
+    pokemon.eliminado = false;
+    Poke.guardarPokemon();
+    verPokemon();
+    alert(`El Pokémon ${pokemon.name} fue agregado`);
 
-  verPokemon();
-  console.log("Se ha agregado un Pokémon:", pokemonData);
-}
-
-function verPokemon() {
-  const existingCards = Array.from(pokemonCaja.children).map((card) => card.id);
-  Object.values(pokemons).forEach((pokemon) => {
-    const cardId = `card${pokemon.id}`;
-    if (!existingCards.includes(cardId) && !pokemon.eliminado) { // Agregar la condición de "eliminado"
-      crearCard(pokemon);
-    }
-  });
+    verificarEliminados();
+  } else {
+    alert(`No se encontró el Pokémon eliminado ${name}`);
+  }
 }
 
 function actualizarPokemon(name) {
-  const pokemonId = Object.keys(pokemons).find((id) => pokemons[id].name === name);
+  const pokemonId = Object.keys(pokemons).find(
+    (id) => pokemons[id].name === name && !pokemons[id].eliminado
+  );
   if (pokemonId) {
     const updatedPokemonData = { ...pokemons[pokemonId] };
-    fetchPokemonData(pokemonId, updatedPokemonData);
+
+    const newName = prompt(
+      "Ingrese el nuevo nombre del Pokémon",
+      updatedPokemonData.name
+    );
+    if (newName) {
+      updatedPokemonData.name = newName;
+    }
+
+    const newImg = prompt(
+      "Ingrese la nueva imagen del Pokémon",
+      updatedPokemonData.sprites.front_default
+    );
+    if (newImg) {
+      updatedPokemonData.sprites.front_default = newImg;
+    }
+
+    const newId = prompt(
+      "Ingrese el nuevo ID del Pokémon",
+      updatedPokemonData.id
+    );
+    if (newId) {
+      updatedPokemonData.id = parseInt(newId);
+    }
+
+    updatedPokemonData.stats.forEach((stat) => {
+      const newStatValue = prompt(
+        `Ingrese el nuevo valor para la estadística ${stat.stat.name}`,
+        stat.base_stat
+      );
+      if (newStatValue) {
+        stat.base_stat = parseInt(newStatValue);
+      }
+    });
+
+    pokemons[pokemonId] = updatedPokemonData;
+    localStorage.setItem(
+      `pokemons_${pokemonId}`,
+      JSON.stringify(updatedPokemonData)
+    );
+
+    const cardToUpdate = document.querySelector(`#card${pokemonId}`);
+    cardToUpdate.querySelector("h3").textContent = updatedPokemonData.name;
+    cardToUpdate.querySelector("img").src =
+      updatedPokemonData.sprites.front_default;
+
+    const statsHtml = updatedPokemonData.stats
+      .map((stat) => `<p>${stat.stat.name}: ${stat.base_stat}</p>`)
+      .join("");
+    cardToUpdate.querySelector(".caja-stats").innerHTML = statsHtml;
+
+    alert(`Se ha actualizado el Pokémon "${name}"`);
+    Poke.guardarPokemon();
   } else {
-    console.log(`No se encontró ningún Pokémon con el nombre "${name}"`);
+    alert(
+      `No se encontró ningún Pokémon con el nombre "${name}" o ya está eliminado`
+    );
   }
 }
 
-function deletePokemon(name) {
-  const pokemonId = Object.keys(pokemons).find((id) => pokemons[id].name === name);
-  if (pokemonId) {
-    const cardToRemove = document.querySelector(`#card${pokemonId}`);
-    cardToRemove.remove();
-    pokemons[pokemonId].eliminado = true; // Marcar el Pokémon como eliminado en el objeto "pokemons"
-    localStorage.setItem("pokemons", JSON.stringify(pokemons)); // Actualizar el almacenamiento local
-    console.log(`Se ha eliminado el Pokémon "${name}"`);
-  } else {
-    console.log(`No se encontró ningún Pokémon con el nombre "${name}"`);
+function verificarEliminados() {
+  const eliminados = Object.values(pokemons).filter(
+    (pokemon) => pokemon.eliminado
+  );
+
+  if (eliminados.length > 0) {
+    eliminados.forEach((pokemon) => {
+      delete pokemon.eliminado;
+      crearCard(pokemon);
+    });
+
+    Poke.guardarPokemon();
   }
+}
+
+function eliminarPokemon(name) {
+  const pokemon = Object.values(pokemons).find(
+    (pokemon) => pokemon.name.toLowerCase() === name
+  );
+
+  if (pokemon) {
+    const cardToRemove = document.querySelector(`#card${pokemon.id}`);
+    cardToRemove.remove();
+
+    pokemons[pokemon.id].eliminado = true;
+    Poke.guardarPokemon();
+
+    console.log(`El Pokémon ${pokemon.name} fue eliminado`);
+
+    alert(`Se ha eliminado el Pokémon ${pokemon.name}`);
+  } else {
+    alert(`No se encontró el Pokémon ${name}`);
+  }
+}
+
+function verPokemon() {
+  console.log("Pokemons actuales:");
+  console.log(pokemons);
 }
 
 traerPokemons();
