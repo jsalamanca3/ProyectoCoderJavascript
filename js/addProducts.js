@@ -5,63 +5,57 @@ let pagina = 1;
 const limit = 15;
 
 if (Object.keys(pokemons).length > 0) {
-  window.addEventListener("beforeunload", function (event) {
-    traerPokemons();
+  window.addEventListener("beforeunload", async function (event) {
+    await traerPokemons();
   });
 }
 
-function fetchPokemon(id) {
-  fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-      if (!isPokemonExist(data)) {
-        const pokemonData = {
-          id: data.id,
-          name: data.name,
-          sprites: {
-            front_default:
-              data.sprites && data.sprites.front_default
-                ? data.sprites.front_default
-                : "",
-          },
-          stats: [],
-          eliminado: false,
-        };
-        fetchPokemonData(id, pokemonData);
-      }
-    })
-    .catch((error) => {
-      console.log(`Error al obtener los datos del Pokémon ${id}:`, error);
-    });
+async function fetchPokemon(id) {
+  try {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+    const data = await res.json();
+    console.log(data);
+    if (!isPokemonExist(data)) {
+      const pokemonData = {
+        id: data.id,
+        name: data.name,
+        sprites: {
+          front_default:
+            data.sprites && data.sprites.front_default
+              ? data.sprites.front_default
+              : "",
+        },
+        stats: [],
+        eliminado: false,
+      };
+      await fetchPokemonData(id, pokemonData);
+    }
+  } catch (error) {
+    console.log(`Error al obtener los datos del Pokémon ${id}:`, error);
+  }
 }
 
 function isPokemonExist(pokemonData) {
   return pokemons.hasOwnProperty(pokemonData.id);
 }
 
-function fetchPokemonData(id, pokemonData) {
-  fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`)
-    .then((response) => response.json())
-    .then((data) => {
-      const stats = data.stats;
-      stats.forEach((stat) => {
-        const statName = stat.stat.name;
-        const baseValue = stat.base_stat;
-
-        console.log(`${statName}: ${baseValue}`);
-      });
-
-      pokemonData.stats = stats;
-
-      pokemons[id] = pokemonData;
-      localStorage.setItem("pokemons", JSON.stringify(pokemons));
-
-      crearCard(pokemonData);
-    })
-    .catch((error) => {
-      console.log(`Error al obtener los datos del Pokémon ${id}:`, error);
+async function fetchPokemonData(id, pokemonData) {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}/`);
+    const data = await response.json();
+    const stats = data.stats;
+    stats.forEach((stat) => {
+      const statName = stat.stat.name;
+      const baseValue = stat.base_stat;
+      console.log(`${statName}: ${baseValue}`);
     });
+    pokemonData.stats = stats;
+    pokemons[id] = pokemonData;
+    localStorage.setItem("pokemons", JSON.stringify(pokemons));
+    crearCard(pokemonData);
+  } catch (error) {
+    console.log(`Error al obtener los datos del Pokémon ${id}:`, error);
+  }
 }
 
 let pageNumber = parseInt(localStorage.getItem("pageNumber")) || 1;
@@ -70,13 +64,13 @@ function guardarPaginaActual() {
   localStorage.setItem("pageNumber", pageNumber.toString());
 }
 
-function traerPokemons() {
+async function traerPokemons() {
   const offset = (pageNumber - 1) * limit;
   const finalId = offset + limit;
 
   for (let i = offset + 1; i <= finalId; i++) {
     if (!pokemons[i]) {
-      fetchPokemon(i);
+      await fetchPokemon(i);
     }
   }
 
@@ -97,18 +91,18 @@ document.addEventListener("DOMContentLoaded", function () {
   verPokemon();
 
   const btnSiguiente = document.querySelector("#btnSiguiente");
-  btnSiguiente.addEventListener("click", () => {
+  btnSiguiente.addEventListener("click", async () => {
     pageNumber++;
     guardarPaginaActual();
-    traerPokemons();
+    await traerPokemons();
   });
 
   const btnAtras = document.querySelector("#btnAtras");
-  btnAtras.addEventListener("click", () => {
+  btnAtras.addEventListener("click", async () => {
     if (pageNumber > 1) {
       pageNumber--;
       guardarPaginaActual();
-      traerPokemons();
+      await traerPokemons();
     }
   });
 
